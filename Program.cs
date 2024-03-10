@@ -9,12 +9,12 @@ namespace BasicSortingAlgorihtms
             var arr = new int[13] { 7, 5, 1, 3, 2, -2, 6, 4, 9, 2, 8, 10, 11 };
 
             //var selectionResult = SelectionSort(arr);
-            var bubbleResult = BubbleSort(arr);
-           
+            //var bubbleResult = BubbleSort(arr);
+            var insertionSort = InsertionSort(arr);
 
             //  Console.WriteLine(String.Join(", ", selectionResult));
-             Console.WriteLine(String.Join(", ", bubbleResult));
-          
+            // Console.WriteLine(String.Join(", ", bubbleResult));
+            Console.WriteLine(String.Join(", ", insertionSort));
             #region [Swap function]
             static int[] Swap(int[] array, int currentElement, int currentElementIndex, int otherElement, int otherElementIndex)
             {
@@ -92,7 +92,42 @@ namespace BasicSortingAlgorihtms
             }
             #endregion
 
-           
+            #region [Insertion-Sort]
+
+            static int[] InsertionSort(int[] array)
+            {
+                for (int i = 1; i < array.Length; i++)
+                {
+                    var currentElement = array[i];
+                    var leftElement = array[i - 1];
+
+                    if (currentElement < leftElement)
+                    {
+                        Swap(array, currentElement, i, leftElement, i - 1);
+
+                        for (int j = i - 1; j < array.Length; j--)
+                        {
+                            if (j == 0)
+                            {
+                                break;
+                            }
+                            currentElement = array[j];
+                            leftElement = array[j - 1];
+                            if (currentElement < leftElement)
+                            {
+                                Swap(array, currentElement, j, leftElement, j - 1);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                return array;
+            }
+
+            #endregion
         }
     }
 }
